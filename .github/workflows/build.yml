@@ -57,7 +57,7 @@ jobs:
                     disable-animations: false
                     script: echo "Generated AVD snapshot for caching."
 
-            -   name: Run Android instrumented tests
+            -   name: Run Android instrumentation tests
                 uses: reactivecircus/android-emulator-runner@v2
                 with:
                     api-level: 33
@@ -83,19 +83,14 @@ jobs:
                         adb uninstall com.example.githubactionapplication.test || true
                         adb uninstall com.example.githubactionapplication || true
 
-            - name: Debugging - Print directory contents
-              run: |
-                  ls -R "${GITHUB_WORKSPACE}"
-
-            -   name: Check for FAILURES!!!
+            -   name: Instrumentation Tests Results
                 run: |
                     cat instrument_log.txt
-                    # This command checks if the log contains "FAILURES!!!"
                     if grep -q 'FAILURES!!!' instrument_log.txt; then
-                      echo "Failures detected in the log!"
+                      echo "Instrumentation Tests Failed! ❌ Please review the results. 🚨"
                       exit 1
                     else
-                      echo "No failures found in the log."
+                      echo "✅ Instrumentation Tests Passed Successfully! All Green! 🚀""
                     fi
 
 #            -   name: Run Android instrumented tests

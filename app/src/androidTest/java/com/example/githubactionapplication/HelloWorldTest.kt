@@ -26,15 +26,15 @@ class HelloWorldTest {
     fun helloWorld() {
         val intent = Intent(InstrumentationRegistry.getInstrumentation().targetContext, HelloActivity::class.java)
         scenario = ActivityScenario.launch(intent)
-        Thread.sleep(10000)
-        scenario.onActivity { activity ->
-            InstrumentationRegistry.getInstrumentation().getUiAutomation()
-                .grantRuntimePermission(activity.getPackageName(), "android.permission.ACCESS_COARSE_LOCATION")
-            InstrumentationRegistry.getInstrumentation().getUiAutomation()
-                .grantRuntimePermission(activity.getPackageName(), "android.permission.ACCESS_FINE_LOCATION")
-            InstrumentationRegistry.getInstrumentation().getUiAutomation()
-                .grantRuntimePermission(activity.getPackageName(), "android.permission.POST_NOTIFICATIONS")
-        }
+        Thread.sleep(20000)
+//        scenario.onActivity { activity ->
+//            InstrumentationRegistry.getInstrumentation().getUiAutomation()
+//                .grantRuntimePermission(activity.getPackageName(), "android.permission.ACCESS_COARSE_LOCATION")
+//            InstrumentationRegistry.getInstrumentation().getUiAutomation()
+//                .grantRuntimePermission(activity.getPackageName(), "android.permission.ACCESS_FINE_LOCATION")
+//            InstrumentationRegistry.getInstrumentation().getUiAutomation()
+//                .grantRuntimePermission(activity.getPackageName(), "android.permission.POST_NOTIFICATIONS")
+//        }
 
 
 

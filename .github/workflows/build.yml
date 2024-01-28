@@ -85,7 +85,8 @@ jobs:
 
             -   name: Check for FAILURES!!!
                 run: |
-                    if grep -n -q 'FAILURES!!!' "${{ github.workspace }}/path/to/log/file.txt"; then
+                    LOG_FILE_PATH="${GITHUB_WORKSPACE}/path/to/log/file.txt"
+                    if grep -n -q 'FAILURES!!!' "$LOG_FILE_PATH"; then
                       echo "Failures detected in the log!"
                       exit 1
                     else

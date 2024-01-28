@@ -74,9 +74,9 @@ jobs:
                         adb uninstall com.example.githubactionapplication.test || true
                         adb uninstall com.example.githubactionapplication || true
                         echo "Install debug apk"
-                        adb install -r debug/app-debug.apk
+                        adb install -r app/build/outputs/apk/debug/app-debug.apk
                         echo "Install test apk"
-                        adb install -r androidTest/debug/app-debug-androidTest.apk
+                        adb install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
                         echo "Running instrumentation tests"
                         adb shell am instrument -w com.example.githubactionapplication.test/androidx.test.runner.AndroidJUnitRunner
                         echo "Clean up installed apk"

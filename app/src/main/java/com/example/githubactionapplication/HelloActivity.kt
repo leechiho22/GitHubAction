@@ -8,17 +8,17 @@ import androidx.test.espresso.IdlingResource
 
 class HelloActivity : AppCompatActivity(){
 
-    @Nullable
+//    @Nullable
     private var mIdlingResource: SimpleIdlingResource? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hello)
     }
 
-    fun getIdlingResource(): IdlingResource {
-        if (mIdlingResource == null) {
-            mIdlingResource = SimpleIdlingResource()
-        }
-        return mIdlingResource!!
-    }
+//    fun getIdlingResource(): IdlingResource {
+//        if (mIdlingResource == null) {
+//            mIdlingResource = SimpleIdlingResource()
+//        }
+//        return mIdlingResource!!
+//    }
 }

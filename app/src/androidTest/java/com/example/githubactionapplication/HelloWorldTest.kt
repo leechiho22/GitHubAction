@@ -26,11 +26,8 @@ class HelloWorldTest {
     fun helloWorld() {
         val intent = Intent(InstrumentationRegistry.getInstrumentation().targetContext, HelloActivity::class.java)
         scenario = ActivityScenario.launch(intent)
+        Thread.sleep(10000)
         scenario.onActivity { activity ->
-            mIdlingResource = activity.getIdlingResource()
-            // To prove that the test fails, omit this call:
-            IdlingRegistry.getInstance().register(mIdlingResource)
-
             InstrumentationRegistry.getInstrumentation().getUiAutomation()
                 .grantRuntimePermission(activity.getPackageName(), "android.permission.ACCESS_COARSE_LOCATION")
             InstrumentationRegistry.getInstrumentation().getUiAutomation()
@@ -46,10 +43,4 @@ class HelloWorldTest {
         scenario.close()
     }
 
-    @After
-    fun unregisterIdlingResource() {
-        if (mIdlingResource != null) {
-            IdlingRegistry.getInstance().unregister(mIdlingResource)
-        }
-    }
 }

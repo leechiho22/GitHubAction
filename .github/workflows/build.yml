@@ -64,7 +64,7 @@ jobs:
                     key: avd-33
 
             -   name: Create AVD and generate snapshot for caching
-#                if: steps.avd-cache.outputs.cache-hit != 'true'
+                if: steps.avd-cache.outputs.cache-hit != 'true'
                 uses: reactivecircus/android-emulator-runner@v2
                 with:
                     api-level: 33

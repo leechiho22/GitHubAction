@@ -26,7 +26,7 @@ class HelloWorldTest {
     fun helloWorld() {
         val intent = Intent(InstrumentationRegistry.getInstrumentation().targetContext, HelloActivity::class.java)
         scenario = ActivityScenario.launch(intent)
-        Thread.sleep(20000)
+        Thread.sleep(60000) // 60 second
 //        scenario.onActivity { activity ->
 //            InstrumentationRegistry.getInstrumentation().getUiAutomation()
 //                .grantRuntimePermission(activity.getPackageName(), "android.permission.ACCESS_COARSE_LOCATION")

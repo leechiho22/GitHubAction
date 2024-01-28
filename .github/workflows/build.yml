@@ -85,10 +85,12 @@ jobs:
 
             -   name: Check for FAILURES!!!
                 run: |
-                      if grep -q "FAILURES!!!" "${{ github.workspace }}/path/to/log/file.txt"; then
-                        echo "Failures detected in the log!"
-                        exit 1
-                      fi
+                    if grep -n -q 'FAILURES!!!' "${{ github.workspace }}/path/to/log/file.txt"; then
+                      echo "Failures detected in the log!"
+                      exit 1
+                    else
+                      echo "No failures found in the log."
+                    fi
 
 #            -   name: Run Android instrumented tests
 #                uses: reactivecircus/android-emulator-runner@v2

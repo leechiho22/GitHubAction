@@ -78,7 +78,7 @@ jobs:
                         echo "Install test apk"
                         adb install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
                         echo "Running instrumentation tests"
-                        adb shell am instrument -w com.example.githubactionapplication.test/androidx.test.runner.AndroidJUnitRunner
+                        adb shell am instrument -w com.example.githubactionapplication.test/androidx.test.runner.AndroidJUnitRunner > instrument_log.txt 2>&1
                         echo "Clean up installed apk"
                         adb uninstall com.example.githubactionapplication.test || true
                         adb uninstall com.example.githubactionapplication || true
@@ -89,8 +89,9 @@ jobs:
 
             -   name: Check for FAILURES!!!
                 run: |
+                    cat instrument_log.txt
                     # This command checks if the log contains "FAILURES!!!"
-                    if grep -q 'FAILURES!!!' "${GITHUB_RUNNER_DEBUG}/_diag/session.log"; then
+                    if grep -q 'FAILURES!!!' instrument_log.txt; then
                       echo "Failures detected in the log!"
                       exit 1
                     else

@@ -105,7 +105,7 @@ jobs:
                 run: |
                     cat instrument_log.txt
                     if grep -q 'FAILURES!!!' instrument_log.txt; then
-                      echo "Instrumentation Tests Failed! ❌ Please review the results. 🚨"
+                      echo "❌ Instrumentation Tests Failed! Please review the results. 🚨"
                       exit 1
                     else
                       echo "✅ Instrumentation Tests Passed Successfully! All Green! 🚀"

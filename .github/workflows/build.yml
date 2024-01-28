@@ -26,8 +26,14 @@ jobs:
                     java-version: '17'
                     distribution: 'corretto'
 
+            -   name: Setup Android SDK
+                uses: android-actions/setup-android@v2
+
             -   name: Gradle cache
                 uses: gradle/actions/setup-gradle@v3
+
+            -   name: Build Android Project
+                run: ./gradlew assembleDebug assembleAndroidTest
 
             -   name: AVD cache
                 uses: actions/cache@v4
@@ -63,11 +69,37 @@ jobs:
                     emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
                     disable-animations: true
                     script: |
-                        ./gradlew connectedAndroidTest
+                        avdmanager list device
+                        echo "Uninstall existing apk"
+                        adb uninstall com.example.githubactionapplication.test || true
+                        adb uninstall com.example.githubactionapplication || true
+                        echo "Install debug apk"
+                        adb install -r debug/app-debug.apk
+                        echo "Install test apk"
+                        adb install -r androidTest/debug/app-debug-androidTest.apk
+                        echo "Running instrumentation tests"
+                        adb shell am instrument -w com.example.githubactionapplication.test/androidx.test.runner.AndroidJUnitRunner
+                        echo "Clean up installed apk"
+                        adb uninstall com.example.githubactionapplication.test || true
+                        adb uninstall com.example.githubactionapplication || true
 
-            -   name: Upload Reports
-                uses: actions/upload-artifact@v3
-                with:
-                    name: Test-Reports
-                    path: app/build/reports
-                if: always()
+#            -   name: Run Android instrumented tests
+#                uses: reactivecircus/android-emulator-runner@v2
+#                with:
+#                    api-level: 33
+#                    target: google_apis
+#                    arch: x86_64
+#                    profile: pixel_5
+#                    emulator-boot-timeout: 360    #6 minutes
+#                    force-avd-creation: false
+#                    emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
+#                    disable-animations: true
+#                    script: |
+#                        ./gradlew connectedAndroidTest
+#
+#            -   name: Upload Reports
+#                uses: actions/upload-artifact@v3
+#                with:
+#                    name: Test-Reports
+#                    path: app/build/reports
+#                if: always()

@@ -32,11 +32,19 @@ jobs:
             -   name: Gradle cache
                 uses: gradle/actions/setup-gradle@v3
 
+            -   name: Run unit test
+                run: ./gradlew test
+
             -   name: Build Android Project
                 run: ./gradlew assembleDebug assembleAndroidTest
 
-            -   name: Run unit test
-                run: ./gradlew test
+            -   name: Upload Artifacts
+                uses: actions/upload-artifact@v2
+                with:
+                    name: test-apks
+                    path: |
+                        app/build/outputs/apk/androidTest/debug/*.apk
+                        app/build/outputs/apk/debug/*.apk
 
             -   name: Upload Reports
                 uses: actions/upload-artifact@v3

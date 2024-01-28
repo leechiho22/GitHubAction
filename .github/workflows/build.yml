@@ -83,6 +83,10 @@ jobs:
                         adb uninstall com.example.githubactionapplication.test || true
                         adb uninstall com.example.githubactionapplication || true
 
+            - name: Debugging - Print directory contents
+              run: |
+                  ls -R "${GITHUB_WORKSPACE}"
+
             -   name: Check for FAILURES!!!
                 run: |
                     LOG_FILE_PATH="${GITHUB_WORKSPACE}/file.txt"

@@ -97,8 +97,10 @@ jobs:
                         adb install -r app/build/outputs/apk/debug/app-debug.apk
                         echo "Install test apk"
                         adb install -r app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
-                        echo "Running instrumentation tests"
+                        echo "Dismiss system dialog popup"
                         adb shell am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS
+                        echo "Running instrumentation tests"
+                        adb shell am instrument -w -e class com.example.githubactionapplication.ZFirstTest com.example.githubactionapplication.test/androidx.test.runner.AndroidJUnitRunner
                         adb shell am instrument -w com.example.githubactionapplication.test/androidx.test.runner.AndroidJUnitRunner 2>&1 | tee instrument_log.txt
                         echo "Clean up installed apk"
                         adb uninstall com.example.githubactionapplication.test || true

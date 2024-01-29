@@ -22,13 +22,15 @@ import java.util.concurrent.TimeoutException
 
 
 @RunWith(AndroidJUnit4::class)
-class HelloWorldTest {
+class ZFirstTest {
     lateinit var scenario: ActivityScenario<HelloActivity>
 
     @Test
     fun helloWorld() {
         val intent = Intent(InstrumentationRegistry.getInstrumentation().targetContext, HelloActivity::class.java)
         scenario = ActivityScenario.launch(intent)
+        onView(withText("Hello Android!")).perform(WaitUntilVisibleAction(100000))  // 100 second
+            .check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         scenario.close()
     }
 

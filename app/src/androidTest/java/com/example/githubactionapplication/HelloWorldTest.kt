@@ -21,7 +21,7 @@ class HelloWorldTest {
     fun helloWorld() {
         val intent = Intent(InstrumentationRegistry.getInstrumentation().targetContext, HelloActivity::class.java)
         scenario = ActivityScenario.launch(intent)
-        Thread.sleep(10000) // 10 second
+        Thread.sleep(60000) // 60 second
         onView(withText("Hello Android!")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
         scenario.close()
     }

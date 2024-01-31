@@ -8,7 +8,7 @@ jobs:
 
     test_app:
         name: Test app
-        runs-on: ubuntu-latest
+        runs-on: macos-latest
 
         steps:
             -   name: checkout
@@ -61,15 +61,15 @@ jobs:
                     path: |
                         ~/.android/avd/*
                         ~/.android/adb*
-                    key: avd-33
+                    key: avd-29-google_apis-x86_64
 
             -   name: Create AVD and generate snapshot for caching
                 if: steps.avd-cache.outputs.cache-hit != 'true'
                 uses: reactivecircus/android-emulator-runner@v2
                 with:
-                    api-level: 25
+                    api-level: 29
                     target: google_apis
-                    arch: armeabi-v7a
+                    arch: x86_64
                     profile: pixel_5
                     emulator-boot-timeout: 360    #6 minutes
                     force-avd-creation: false
@@ -80,9 +80,9 @@ jobs:
             -   name: Run Android instrumentation tests
                 uses: reactivecircus/android-emulator-runner@v2
                 with:
-                    api-level: 25
+                    api-level: 29
                     target: google_apis
-                    arch: armeabi-v7a
+                    arch: x86_64
                     profile: pixel_5
                     emulator-boot-timeout: 360    #6 minutes
                     force-avd-creation: false
